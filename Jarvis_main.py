@@ -1,6 +1,8 @@
 import pyttsx3
 import speech_recognition 
-
+import requests
+from bs4 import BeautifulSoup
+import datetime
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
@@ -49,6 +51,12 @@ if __name__ == "__main__":
                     speak("perfect sir ")
                 elif "thank you" in query:
                     speak("You are welcome, sir. Feel free to ask anytime.")
+                
+                elif "say" in query:
+                    query = query.replace("Jarvis", "")   
+                    query = query.replace("say", "")   
+                    query = query.replace("to", "")   
+                    speak(query)
 
                 #Searching from web (Google, youtube, wiki)
                 elif "google" in query:
@@ -61,4 +69,40 @@ if __name__ == "__main__":
                     from SearchNow import searchWikipedia
                     searchWikipedia(query)
 
-                    
+                #Temprature and weather 
+                
+                elif "temperature" in query:
+                    search = "temperature in almora"
+                    url = f"https://www.google.com/search?q={search}"
+                    r = requests.get(url)
+                    data = BeautifulSoup(r.text, "html.parser")
+                    temp = data.find("div", class_= "BNeawe").text
+                    speak(f"Current {search} is {temp}")
+
+                elif "weather" in query:
+                    search = "weather in almora"
+                    url = f"https://www.google.com/search?q={search}"
+                    r = requests.get(url)
+                    data = BeautifulSoup(r.text, "html.parser")
+                    weather = data.find("div", class_= "BNeawe").text
+                    speak(f"Current {search} is {weather}")
+
+                elif "the time" in query :
+                    strTime = datetime.datetime.now().strftime("%H:%M") 
+                    speak (f"Sir, The current time is {strTime}")
+
+                elif "the day" in query :
+                    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                    strDay = datetime.datetime.now().weekday()
+                    print (f"Today is: {days[strDay]}")
+                    speak (f"Today is: {days[strDay]}")
+
+                elif "the date" in query :
+                    now = datetime.datetime.now()
+                    formatted_date = now.strftime("%d-%B-%Y")
+                    print("Today's date is:", formatted_date)
+                    speak (f"Today's date is: {formatted_date}")
+                      
+                elif "finally sleep" in query:
+                    speak("Okay sir. Going to sleep.")
+                    exit()   

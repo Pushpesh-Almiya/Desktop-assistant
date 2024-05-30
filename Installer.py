@@ -3,3 +3,4 @@ import pip
 # pip.main(['install','pywhatkit'])
 # pip.main(['install','wikipedia'])
 # pip.main(['install','webbrowser'])
+pip.main(['install','bs4'])

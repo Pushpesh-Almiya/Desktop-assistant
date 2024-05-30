@@ -1,5 +1,6 @@
 import pyttsx3
 import speech_recognition 
+
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
@@ -48,5 +49,16 @@ if __name__ == "__main__":
                     speak("perfect sir ")
                 elif "thank you" in query:
                     speak("You are welcome, sir. Feel free to ask anytime.")
+
+                #Searching from web (Google, youtube, wiki)
+                elif "google" in query:
+                    from SearchNow import searchGoogle
+                    searchGoogle(query)
+                elif "youtube" in query:
+                    from SearchNow import searchYoutube
+                    searchYoutube(query)
+                elif "google" in query:
+                    from SearchNow import searchWikipedia
+                    searchWikipedia(query)
 
                     

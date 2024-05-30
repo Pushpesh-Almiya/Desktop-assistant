@@ -38,3 +38,15 @@ if __name__ == "__main__":
                 if "go to sleep" in query:
                     speak("Ok sir , You can me call anytime")
                     break 
+
+                #conversations 
+                elif 'hello' in query:
+                    speak("Hello sir, how are you?")
+                elif "i am fine" in query:
+                    speak("That's great sir")
+                elif "how are you ?" in query:
+                    speak("perfect sir ")
+                elif "thank you" in query:
+                    speak("You are welcome, sir. Feel free to ask anytime.")
+
+                    

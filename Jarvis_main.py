@@ -3,6 +3,7 @@ import speech_recognition
 import requests
 from bs4 import BeautifulSoup
 import datetime
+
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
@@ -47,7 +48,7 @@ if __name__ == "__main__":
                     speak("Hello sir, how are you?")
                 elif "i am fine" in query:
                     speak("That's great sir")
-                elif "how are you ?" in query:
+                elif "how are you" in query:
                     speak("perfect sir ")
                 elif "thank you" in query:
                     speak("You are welcome, sir. Feel free to ask anytime.")
@@ -58,6 +59,15 @@ if __name__ == "__main__":
                     query = query.replace("to", "")   
                     speak(query)
 
+                #Open/Close Apps with just your voice...
+                elif "open" in query :
+                    from Dictapp import openAppWeb
+                    openAppWeb(query)
+
+                elif "close" in query:
+                    from Dictapp import closeAppWeb
+                    closeAppWeb(query)    
+
                 #Searching from web (Google, youtube, wiki)
                 elif "google" in query:
                     from SearchNow import searchGoogle
@@ -65,7 +75,7 @@ if __name__ == "__main__":
                 elif "youtube" in query:
                     from SearchNow import searchYoutube
                     searchYoutube(query)
-                elif "google" in query:
+                elif "wikipedia" in query:
                     from SearchNow import searchWikipedia
                     searchWikipedia(query)
 
@@ -102,7 +112,7 @@ if __name__ == "__main__":
                     formatted_date = now.strftime("%d-%B-%Y")
                     print("Today's date is:", formatted_date)
                     speak (f"Today's date is: {formatted_date}")
-                      
-                elif "finally sleep" in query:
+
+                elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

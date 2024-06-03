@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 import os
+import pyautogui
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -126,9 +127,31 @@ if __name__ == "__main__":
                     print("Input time example : 10 and 10 and 10")
                     speak("Set the time")
                     a= input("Please tell the time :- ")
-                    print (a)
+                    # print (a)
                     alarm(a)
                     speak("Done, sir")
+
+                #Fully automate YouTube controls.........
+                elif "pause" in query:
+                    pyautogui.press("k")
+                    speak("Video Paused")
+                elif "play" in query:
+                    pyautogui.press("k")
+                    speak("Video Played")
+                elif "mute" in query:
+                    pyautogui.press("m")
+                    speak("Video muted")
+                elif "unmute" in query:
+                    pyautogui.press("m")
+                    speak("Video unmuted")
+                elif "volume up" in query:
+                    from Keyboard import volumeUp
+                    speak("Turning volume up,Sir")
+                    volumeUp()
+                elif "volume down" in query:
+                    from Keyboard import volumeDown
+                    speak("Turning volume down,Sir")
+                    volumeDown()
 
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")

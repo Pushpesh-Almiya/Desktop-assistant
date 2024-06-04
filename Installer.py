@@ -4,4 +4,5 @@ import pip
 # pip.main(['install','wikipedia'])
 # pip.main(['install','webbrowser'])
 # pip.main(['install','bs4'])
-pip.main(['install','pynput'])
+# pip.main(['install','pynput'])
+pip.main(['install','wolframalpha'])

@@ -54,22 +54,35 @@ if __name__ == "__main__":
                     break 
 
                 #conversations 
-                elif 'hello' in query:
-                    speak("Hello sir, how are you?")
-                elif "i am fine" in query:
-                    speak("That's great sir")
-                elif "how are you" in query:
-                    speak("perfect sir ")
-                elif "thank you" in query:
-                    speak("You are welcome, sir. Feel free to ask anytime.")
-                
                 elif "say" in query:
                     query = query.replace("Jarvis", "")   
                     query = query.replace("say", "")   
                     query = query.replace("to", "")   
                     speak(query)
 
+                elif 'hello' in query:
+                    speak("Hello sir, how are you?")
+                elif "i am fine" in query or "i m fine" in query:
+                    speak("That's great sir")
+                elif "how are you" in query:
+                    speak("perfect sir ")
+                elif "thank you" in query or "thank" in query:
+                    speak("You are welcome,sir. Feel free to ask anytime.")
+                
                 #Open/Close Apps with just your voice...
+                #Easy method.........
+                # elif "open" in query:
+                #     query = query.replace("open","")
+                #     query = query.replace("jarvis","")
+                #     pyautogui.press("super")
+                #     pyautogui.typewrite(query)
+                #     pyautogui.sleep(2)
+                #     pyautogui.press("enter")
+
+                # elif "close" in query:
+                #     speak("Closing, sir") 
+                #     pyautogui.hotkey("ctrl","w") 
+
                 elif "open" in query :
                     from Dictapp import openAppWeb
                     openAppWeb(query)
@@ -164,6 +177,13 @@ if __name__ == "__main__":
                 elif "what do you remember" in query:
                     remember = open("Remember.txt","r")
                     speak("You told me" + remember.read())
+
+                #Calculate function
+                elif "calculate" in query:  
+                    from CalculareNumbers import calc
+                    query = query.replace("calculate","")    
+                    query = query.replace("jarvis","")    
+                    calc(query)
 
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")

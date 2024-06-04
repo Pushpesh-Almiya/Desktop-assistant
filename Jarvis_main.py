@@ -185,6 +185,20 @@ if __name__ == "__main__":
                     query = query.replace("jarvis","")    
                     calc(query)
 
+                #Shut down function
+                elif "shut down" in query or "shutdown" in query:
+                    speak("Are you sure you want to shutdown")
+                    shutdown = input("Do you want to shut down your computer ? (yes/no):-")
+                    if shutdown == "yes":
+                        os.system("shutdown /s /t 1")
+                    elif shutdown == "no":
+                        break
+
+                #Whatsapp message .....
+                elif "whatsapp" in query :
+                    from Whatsapp import sendMessage
+                    sendMessage()
+
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

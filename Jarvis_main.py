@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import datetime
 import os
 import pyautogui
+from plyer import notification
+from pygame import mixer
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -199,6 +201,68 @@ if __name__ == "__main__":
                     from Whatsapp import sendMessage
                     sendMessage()
 
+                #Schedule my day.....
+                elif "schedule my day" in query:
+                    tasks =[]
+                    speak ("Do you want to clear the old tasks? [Please speak YES or NO]") 
+                    query= takeCommand().lower()
+                    if "yes" in query:
+                        file = open("tasks.txt","w")
+                        file.write("")
+                        file.close()
+                        no_tasks = int(input("Enter the number of tasks :- "))
+                        i = 0
+                        for i in range(no_tasks):
+                            tasks.append(input("Enter the task:-"))
+                            file= open ("tasks.txt","a")
+                            file.write(f"{i+1} => {tasks[i]}\n")
+                            file.close()
+
+                    elif "no" in query:
+                        i = 0
+                        no_tasks = int(input("Enter the number of tasks :- "))
+                        for i in range(no_tasks):
+                            tasks.append(input("Enter the task:-"))
+                            file= open ("tasks.txt","a")
+                            file.write(f"{i+1} => {tasks[i]}\n")
+                            file.close()
+
+                elif "show my schedule" in query:
+                    file = open("tasks.txt","r")
+                    content = file.read()
+                    file.close()
+                    mixer.init()
+                    mixer.music.load("notification.mp3")
+                    mixer.music.play()
+                    notification.notify(
+                        title ="My Schedule :- ",
+                        message = content,
+                        timeout =  15
+                    )
+                # Match score by your voice
+                elif "cricket score" in query:
+                    from plyer import notification
+                    import requests
+                    from bs4 import BeautifulSoup
+                    url = "https://www.cricbuzz.com/"
+                    page = requests.get(url)
+                    soup = BeautifulSoup(page.text,'html.parser')
+                    team1 = soup.find_all(class_ ="cb-ovr-flo cb-hmscg-tm-nm")(0).get_text()
+                    team2 = soup.find_all(class_ ="cb-ovr-flo cb-hmscg-tm-nm")(1).get_text()
+                    team1_score = soup.find_all(class_ ="cb-over-flo")[8].get_text()
+                    team2_score = soup.find_all(class_ ="cb-over-flo")[10].get_text()
+                    print(f"{team1} :: {team1_score}")
+                    print(f"{team2} :: {team2_score}")
+                    
+                    #Notification
+                    mixer.init()
+                    mixer.music.load("notification.mp3")
+                    mixer.music.play()
+                    notification.notify(
+                        title = "Cricket match score",
+                        message = f"{team1} : {team1_score}\n {team2} : {team2_score}",
+                        timeout = 10
+                    )
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

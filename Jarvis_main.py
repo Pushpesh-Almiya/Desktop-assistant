@@ -55,6 +55,15 @@ if __name__ == "__main__":
                     speak("Ok sir , You can me call anytime")
                     break 
 
+                #Google translate 
+                elif "translate" in query:
+                    from Translator import translategl
+                    query = query.replace("jarvis"," ")    
+                    query = query.replace("please"," ")    
+                    query = query.replace("translate"," ")
+                    translategl(query)
+                    
+                        
                 #conversations 
                 elif "say" in query:
                     query = query.replace("Jarvis", "")   
@@ -282,7 +291,7 @@ if __name__ == "__main__":
                     pyautogui.sleep(2)
                     speak("Smile please")
                     pyautogui.press("enter")
-                    
+        
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

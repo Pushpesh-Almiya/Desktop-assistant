@@ -7,4 +7,4 @@ import pip
 # pip.main(['install','pynput'])
 # pip.main(['install','wolframalpha'])
 # pip.main(['install','plyer']) #Notification
-pip.main(['install','pygame']) # play ringtone
+# pip.main(['install','pygame']) # play ringtone

@@ -1,2 +1,4 @@
 0 => 5am wake up
 1 => 8am maths practice
+1 => Go to ground for netball
+2 => 9'O clock coding

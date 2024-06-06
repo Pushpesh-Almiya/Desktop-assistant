@@ -146,6 +146,12 @@ if __name__ == "__main__":
                     alarm(a)
                     speak("Done, sir")
 
+                #Rock, paper, scissor game ...
+                elif "play a game" in query:
+                    from Game import play_game
+                    play_game()
+
+
                 #Fully automate YouTube controls.........
                 elif "pause" in query:
                     pyautogui.press("k")
@@ -246,23 +252,37 @@ if __name__ == "__main__":
                     from bs4 import BeautifulSoup
                     url = "https://www.cricbuzz.com/"
                     page = requests.get(url)
-                    soup = BeautifulSoup(page.text,'html.parser')
-                    team1 = soup.find_all(class_ ="cb-ovr-flo cb-hmscg-tm-nm")(0).get_text()
-                    team2 = soup.find_all(class_ ="cb-ovr-flo cb-hmscg-tm-nm")(1).get_text()
-                    team1_score = soup.find_all(class_ ="cb-over-flo")[8].get_text()
-                    team2_score = soup.find_all(class_ ="cb-over-flo")[10].get_text()
+                    soup = BeautifulSoup(page.text,"html.parser")
+                    team1 = soup.find_all(class_ = "cb-col-50 cb-ovr-flo cb-hmscg-tm-name")[0].span.get_text()
+                    team2 = soup.find_all(class_ = "cb-col-50 cb-ovr-flo cb-hmscg-tm-name")[1].span.get_text()
+                    team1_score = soup.find_all(class_ = "cb-ovr-flo")[8].get_text()
+                    team2_score = soup.find_all(class_ = "cb-ovr-flo")[10].get_text()
                     print(f"{team1} :: {team1_score}")
                     print(f"{team2} :: {team2_score}")
-                    
+
                     #Notification
                     mixer.init()
                     mixer.music.load("notification.mp3")
                     mixer.music.play()
                     notification.notify(
                         title = "Cricket match score",
-                        message = f"{team1} : {team1_score}\n {team2} : {team2_score}",
-                        timeout = 10
+                        message = f"{team1} : {team1_score}\n{team2} : {team2_score}",
+                        timeout = 15
                     )
+
+                #Screenshot and capture a photo
+                elif "screenshot" in query:
+                    import pyautogui
+                    ss = pyautogui.screenshot()
+                    ss.save("ss.jpg")
+                elif "click my photo" in query :
+                    pyautogui.press("super")
+                    pyautogui.typewrite("camera")
+                    pyautogui.press("enter")
+                    pyautogui.sleep(2)
+                    speak("Smile please")
+                    pyautogui.press("enter")
+                    
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

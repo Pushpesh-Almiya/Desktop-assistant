@@ -35,7 +35,6 @@ def takeCommand():
     return query
 
 #set alarm using jarvis
-  
 def alarm(query):
     timehere = open("Alarmtext.txt","a")
     timehere.write(query)
@@ -63,7 +62,21 @@ if __name__ == "__main__":
                     query = query.replace("translate"," ")
                     translategl(query)
                     
+                #Focus mode
+                elif "focus mode" in query:
+                    speak("Are you sure that ypu want to enter focus mode? Please enter Yes or No")
+                    a = input("Are you sure that ypu want to enter focus mode : [Yes/No] - ")
+                    a.lower()
+                    if (a== "yes"):
+                        speak("Entering the focus mode.....")
+                        os.startfile("C:\\Users\\almiy\\OneDrive\\Desktop\\Python\\MscProject\\FocusMode.py")
                         
+                    else :
+                        pass
+                elif "show my focus" in query:
+                    from FocusGraph import focus_graph
+                    focus_graph()    
+
                 #conversations 
                 elif "say" in query:
                     query = query.replace("Jarvis", "")   
@@ -291,7 +304,8 @@ if __name__ == "__main__":
                     pyautogui.sleep(2)
                     speak("Smile please")
                     pyautogui.press("enter")
-        
+
+    
                 elif "finally sleep" in query: 
                     speak("Okay sir. Going to sleep.")
                     exit()   

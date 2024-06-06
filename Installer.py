@@ -11,5 +11,5 @@ import pip
 # pip.main(['install','googletrans']) # Google translator
 # pip.main(['install','gtts'])
 # pip.main(['install','playsound'])
-pip.main(['install','fnmatch'])
+pip.main(['install','matplotlib'])
 
